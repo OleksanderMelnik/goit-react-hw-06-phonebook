@@ -1,15 +1,16 @@
 import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
+import { Div, Title, TitleContact } from './App.styled';
 
 export const App = () => {
   return (
-    <div>
-      <h1>Phonebook</h1>
+    <Div>
+      <Title>Phonebook</Title>
       <ContactForm />
-      <h2>Contacts</h2>
+      <TitleContact>Contacts</TitleContact>
       <Filter />
       <ContactList />
-    </div>
+    </Div>
   );
 };

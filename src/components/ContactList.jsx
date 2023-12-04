@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
 import { deletContact } from 'redux/contactsSlice';
-
+import { List, Item, Button } from './ContctsList.style';
 
 export const ContactList = () => {
   const contacts = useSelector(getContacts);
@@ -12,25 +12,25 @@ export const ContactList = () => {
     contact?.name?.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const onDeleteContact = id => {
+  const deleteContact = id => {
     dispatch(deletContact(id));
   };
 
   return (
-    <ul>
+    <List>
       {filterContacts.map(({ id, name, number }) => (
-        <li key={id}>
-          <span>{name}: </span>
-          <span>{number}</span>
-          <button
+        <Item key={id}>
+          <b>{name}: </b>
+          <b>{number}</b>
+          <Button
             type="button"
-            onClick={() => onDeleteContact(id)}
+            onClick={() => deleteContact(id)}
           >
-            Delete
-          </button>
-        </li>
+            delete
+          </Button>
+        </Item>
       ))}
-    </ul>
+    </List>
   );
 };
 

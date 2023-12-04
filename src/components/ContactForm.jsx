@@ -2,14 +2,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
-
+import { Form, Label, Button, Input } from './ContactsForm.styled'
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch(); 
 
-  const handleSubmit = event => {
+  const handleChange = event => {
     event.preventDefault();
+    
     const contact = {
       id: nanoid(),
       name: event.target.elements.name.value,
@@ -17,11 +18,11 @@ export const ContactForm = () => {
     };
 
 
-    const isFilterContact = contacts.some(
+    const filterContact = contacts.some(
       ({ name }) => name.toLowerCase().trim() === contact.name.toLowerCase()
     );
 
-    if (isFilterContact) {
+    if (filterContact) {
       return alert(`${contact.name}: is already in contacts`);
     }
 
@@ -30,28 +31,28 @@ export const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="">
+    <Form onSubmit={handleChange}>
+      <Label htmlFor="">
         Name
-        <input
+        <Input
           type="text"
           name="name"
           title=""
           required
         />
-      </label>
-      <label htmlFor="">
+      </Label>
+      <Label htmlFor="">
         Number
-        <input
+        <Input
           type="tel"
           name="number"
           title=""
           required
         />
-      </label>
-      <button type="submit">
+      </Label>
+      <Button type="submit">
         Add contact
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 };
